@@ -4,3 +4,5 @@ Includes a small CRUD for a defined User Entity
 
 * Remeber to add your datasource connection params at 'persistance.properties' file, to test
 * When datasource added, comment in memory authentication and uncomment DB authentication
+
+Feel free to reach me at carlos.salazar@codesolt.com :)
