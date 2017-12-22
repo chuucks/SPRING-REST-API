@@ -76,7 +76,13 @@
 		<groupId>org.springframework.security.oauth</groupId>
 		<artifactId>spring-security-oauth2</artifactId>
 	</dependency>
-
+	
+	<!-- Spring JPA -->
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-jpa</artifactId>
+	</dependency>
+	
 	<!-- Javax -->
 	<dependency>
 		<groupId>javax.servlet</groupId>

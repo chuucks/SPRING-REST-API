@@ -1,5 +1,7 @@
 package org.codesolt.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,45 +28,37 @@ public class UserController {
 
 	@Autowired
 	private UserManager userManager;
-		
+	
+	@ApiOperation(value = "Crea un nuevo usuario", notes = "Acceso únicamente con rol de Administrador")	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@ApiOperation(value = "Crea un nuevo usuario", 
-		notes = "Proveer en el cuerpo del request los atributos del usuario en formato Json")
 	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		logger.info("User: " + auth.getName() + ", Method: getTicketByRefNum" + ", Role: " + auth.getAuthorities());
-		userManager.createUser(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);		
+		logger.info("User: " + auth.getName() + ", Method: createUser" + ", Role: " + auth.getAuthorities());		
+		return new ResponseEntity<User>(userManager.createUser(user), HttpStatus.OK);		
 	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	@ApiOperation(value = "Obtiene un usuario (por username)", 
-		notes = "Proveer en la url el username del usuario que se desea obtener")
-	public ResponseEntity<User> getUser(@Valid @RequestBody User user) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		logger.info("User: " + auth.getName() + ", Method: getTicketByRefNum" + ", Role: " + auth.getAuthorities());
-		userManager.createUser(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);		
-	}
-
-	@RequestMapping(value = "/", method = RequestMethod.DELETE)
-	@ApiOperation(value = "Elimina un usuario", 
-		notes = "Proveer en la url el username del usuario que se desea eliminar")
-	public ResponseEntity<User> getUser(@Valid @RequestBody User user) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		logger.info("User: " + auth.getName() + ", Method: getTicketByRefNum" + ", Role: " + auth.getAuthorities());
-		userManager.createUser(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);		
-	}
-
+	
+	@ApiOperation(value = "Actualiza un usuario", notes = "Acceso únicamente con rol de Administrador")	
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	@ApiOperation(value = "Actualiza un usuario", 
-		notes = "Proveer en el cuerpo del request los atributos del usuario en formato Json")
-	public ResponseEntity<User> getUser(@Valid @RequestBody User user) {
+	public ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		logger.info("User: " + auth.getName() + ", Method: getTicketByRefNum" + ", Role: " + auth.getAuthorities());
-		userManager.createUser(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);		
+		logger.info("User: " + auth.getName() + ", Method: updateUser" + ", Role: " + auth.getAuthorities());		
+		return new ResponseEntity<User>(userManager.createUser(user), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "Elimina un usuario", notes = "Acceso únicamente con rol de Administrador")	
+	@RequestMapping(value = "/{username}", method = RequestMethod.DELETE)
+	public ResponseEntity<Long> deleteUser(@Valid @PathVariable("username") String userName) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		logger.info("User: " + auth.getName() + ", Method: deleteUser" + ", Role: " + auth.getAuthorities());		
+		return new ResponseEntity<Long>(userManager.deleteUser(userName), HttpStatus.OK);		
+	}
+	
+	@ApiOperation(value = "Obtiene un usuario por username", notes = "Acceso con rol de Usuario y Administrador")
+	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> getUser(@Valid @PathVariable("username") String userName) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		logger.info("User: " + auth.getName() + ", Method: getUser" + ", Role: " + auth.getAuthorities());		
+		return new ResponseEntity<List<User>>(userManager.getUsers(userName), HttpStatus.OK);
 	}
 	
 }

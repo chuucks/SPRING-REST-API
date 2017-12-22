@@ -28,7 +28,7 @@ public class SwaggerConfiguration {
 	}
 
 	private Predicate<String> postPaths() {
-		return or(regex("/oauth/token.*"));
+		return or(regex("/oauth/token.*"), regex("/user.*"));
 	}
 	
 	private ApiInfo apiInfo() {
