@@ -9,7 +9,7 @@ import java.util.List;
 import org.codesolt.model.User;
 import org.codesolt.repository.UserRepository;
 
-@Component
+@Component("userManager")
 public class UserManager {
 	
 	@Autowired
