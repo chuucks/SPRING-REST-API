@@ -1,21 +1,46 @@
 package org.codesolt.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@ToString
-@AllArgsConstructor
+@Entity
+@Data
 public class User {
 	
+	@Id
+	private Integer id;
+	
 	@NotNull
-	@Getter @Setter
 	private String userName;
 	
-	@Getter @Setter
+	@NotNull
 	private String role;
+	
+	@NotNull
+	private Integer active;
+	
+	@Column(name="CREATE_TS", updatable = false)
+	private Date createTs;
+	
+	@Column(name="LAST_UPDT_TS")
+	private Date lastUpdtTs;
+	
+	@PrePersist
+	public void intialTs() {
+		this.createTs = new Date();
+		this.lastUpdtTs = new Date();
+	}
+	
+	@PreUpdate
+	public void updateTs() {
+		this.lastUpdtTs = new Date();
+	}
 }
