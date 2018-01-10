@@ -1,5 +1,7 @@
 package org.codesolt.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,24 +26,17 @@ public class Oauth2Security extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ClientDetailsService clientDetailsService;	
-//	@Autowired
-//	private DataSource dataSource;
-
 	@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) 
-      throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-          .password("user").roles("USER");
-    }
+	private DataSource dataSource;
 	
-//	@Autowired
-//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//        	.dataSource(dataSource)
-//        	.passwordEncoder(passwordEncoder())
-//        	.usersByUsernameQuery("SELECT USERNAME, PASSWORD, ENABLED FROM USER WHERE USERNAME = ?")
-//        	.authoritiesByUsernameQuery("SELECT USERNAME, ROLE FROM USER WHERE USERNAME = ?");
-//    }
+	@Autowired
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+        	.dataSource(dataSource)
+        	.passwordEncoder(passwordEncoder())
+        	.usersByUsernameQuery("SELECT USERNAME, PASSWORD, ACTIVE FROM USER WHERE USERNAME = ?")
+        	.authoritiesByUsernameQuery("SELECT USERNAME, ROLE FROM USER WHERE USERNAME = ?");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

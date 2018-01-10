@@ -9,10 +9,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Data;
 
 @Entity
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 	
 	@Id
@@ -20,6 +23,9 @@ public class User {
 	
 	@NotNull
 	private String userName;
+
+	@NotNull
+	private String password;
 	
 	@NotNull
 	private String role;
@@ -34,13 +40,13 @@ public class User {
 	private Date lastUpdtTs;
 	
 	@PrePersist
-	public void intialTs() {
+	private void intialTs() {
 		this.createTs = new Date();
 		this.lastUpdtTs = new Date();
 	}
 	
 	@PreUpdate
-	public void updateTs() {
+	private void updateTs() {
 		this.lastUpdtTs = new Date();
 	}
 }
