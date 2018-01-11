@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.codesolt.util.EncodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +35,8 @@ public class JDBCConfiguration {
 		DriverManagerDataSource manager = new DriverManagerDataSource();
 		manager.setDriverClassName(env.getProperty("jdbc.driver"));
 		manager.setUrl(env.getProperty("jdbc.url"));
-		manager.setUsername(env.getProperty("jdbc.user"));
-		manager.setPassword(env.getProperty("jdbc.pass"));
+		manager.setUsername(EncodeUtil.decodeBase64String(env.getProperty("jdbc.user")));
+		manager.setPassword(EncodeUtil.decodeBase64String(env.getProperty("jdbc.pass")));
 		manager.setConnectionProperties(jpaProperties()); 	
 		return manager;
 	}

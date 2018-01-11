@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -22,15 +25,23 @@ public class User {
 	private Integer id;
 	
 	@NotNull
+	@Size(min=1, max=100)
 	private String userName;
 
-	@NotNull
+	@Email
+	@NotNull	
+	@Size(min=1, max=100)
+	private String email;
+	
+	@Size(min=1, max=100)
 	private String password;
 	
 	@NotNull
+	@Size(min=1, max=100)
 	private String role;
 	
 	@NotNull
+	@Size(min=1, max=1)
 	private Integer active;
 	
 	@Column(name="CREATE_TS", updatable = false)
