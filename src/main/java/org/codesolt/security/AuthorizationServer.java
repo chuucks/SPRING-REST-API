@@ -35,8 +35,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
             .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
             .scopes("read", "write", "trust")
             .secret("client")
-            .accessTokenValiditySeconds(300).
-            refreshTokenValiditySeconds(600);
+            .accessTokenValiditySeconds(600).
+            refreshTokenValiditySeconds(900);
 	}
 
 	@Override

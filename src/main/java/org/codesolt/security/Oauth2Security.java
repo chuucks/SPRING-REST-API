@@ -78,6 +78,5 @@ public class Oauth2Security extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
-	
+	}	
 }

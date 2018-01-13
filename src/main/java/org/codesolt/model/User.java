@@ -15,12 +15,14 @@ import org.hibernate.validator.constraints.Email;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 public class User {
-	
+
 	@Id
 	private Integer id;
 	
@@ -29,18 +31,15 @@ public class User {
 	private String userName;
 
 	@Email
-	@NotNull	
 	@Size(min=1, max=100)
 	private String email;
 	
 	@Size(min=1, max=100)
 	private String password;
 	
-	@NotNull
 	@Size(min=1, max=100)
 	private String role;
 	
-	@NotNull
 	@Size(min=1, max=1)
 	private Integer active;
 	

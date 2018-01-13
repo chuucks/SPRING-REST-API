@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.codesolt.manager.UserManager;
 import org.codesolt.model.User;
+import org.codesolt.model.UserList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,18 +57,17 @@ public class UserController {
 	
 	@ApiOperation(value = "Obtiene un usuario por username", notes = "Acceso únicamente con rol Administrador")
 	@RequestMapping(value = {"/{username}", "{username}"}, method = RequestMethod.GET)
-	public ResponseEntity<List<User>> getUser(@Valid @PathVariable("username") String userName) {
+	public ResponseEntity<UserList> getUser(@Valid @PathVariable("username") String userName) {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		logger.info("User: " + auth.getName() + ", Method: getUser" + ", Role: " + auth.getAuthorities());		
-		return new ResponseEntity<List<User>>(userManager.getUsers(userName), HttpStatus.OK);
+		return new ResponseEntity<UserList>(userManager.getUsers(userName), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Obtiene todos los usuarios", notes = "Acceso únicamente con rol Administrador")
 	@RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
-	public ResponseEntity<List<User>> getUsers() {
+	public ResponseEntity<UserList> getUsers() {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		logger.info("User: " + auth.getName() + ", Method: getUsers" + ", Role: " + auth.getAuthorities());		
-		return new ResponseEntity<List<User>>(userManager.getUsers(null), HttpStatus.OK);
-	}
-	
+		return new ResponseEntity<UserList>(userManager.getUsers(null), HttpStatus.OK);
+	}	
 }

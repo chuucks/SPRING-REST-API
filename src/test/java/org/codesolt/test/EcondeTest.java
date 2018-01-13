@@ -1,10 +1,6 @@
 package org.codesolt.test;
 
-import java.util.Base64;
-
 import org.apache.log4j.Logger;
-import org.junit.Test;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EcondeTest {
 
@@ -27,6 +23,6 @@ public class EcondeTest {
 //	@Test
 //	public void decodeBase64String() {
 //		String string = "%";
-//		logger.info(new String(Base64.getDecoder().decode(string.getBytes())));
+//		logger.info(new String(Base64.getE#Decoder().decode(string.getBytes())));
 //	}
 }

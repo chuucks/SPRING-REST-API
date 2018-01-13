@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import org.codesolt.model.User;
+import org.codesolt.model.UserList;
 import org.codesolt.repository.UserRepository;
 
 @Component("userManager")
@@ -14,6 +15,7 @@ public class UserManager {
 	
 	@Autowired
 	private UserRepository userRepo;
+	private UserList userList;
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public User createUser(User user) {
@@ -25,11 +27,20 @@ public class UserManager {
 		return userRepo.deleteByUserName(username);
 	};
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-	public List<User> getUsers(String username) {
-		if(username != null)
-			return userRepo.findByUserName(username);
-		else 
-			return userRepo.findAll();
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+	public UserList getUsers(String username) {
+		if(username != null) {
+			List<User> users = userRepo.findByUserName(username);
+			userList = new UserList();
+			userList.setUserList(users);
+			userList.setResults(users.size());
+			return userList;
+		} else { 
+			List<User> users = userRepo.findAll();
+			userList = new UserList();
+			userList.setUserList(users);
+			userList.setResults(users.size());
+			return userList;
+		}
 	};	
 }
