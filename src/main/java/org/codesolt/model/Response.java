@@ -1,7 +1,5 @@
 package org.codesolt.model;
 
-import org.joda.time.Period;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
@@ -12,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Response {
 		
-	private Period period;
+	private String duration;
 	private Boolean success;
+	private String error;
 	private String messagge;
-	private String error;	
 }

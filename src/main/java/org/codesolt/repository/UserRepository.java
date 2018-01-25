@@ -13,16 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 	
-    @Transactional
     Long deleteByUserName(String userName);
-    
-    @Transactional
+
     @Query(value=
-    	"SELECT u.userName, u.email, u.role, u.active, u.createTs, u.lastUpdtTs FROM User u WHERE u.userName = :userName")
+    	"SELECT u.id FROM User u WHERE u.userName = :userName")
+    Integer findIdByUserName(@Param("userName") String userName);    
+    
+    @Query(value=
+    	"SELECT u.id, u.userName, u.email, u.role, u.active, u.createTs, u.lastUpdtTs FROM User u WHERE u.userName = :userName")
     List<User> findByUserName(@Param("userName") String userName);
     
     @Override
-    @Transactional
     @Query(value=
         "SELECT u.userName, u.email, u.role, u.active, u.createTs, u.lastUpdtTs FROM User u")
     List<User> findAll();

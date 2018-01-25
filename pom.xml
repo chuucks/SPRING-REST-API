@@ -28,13 +28,6 @@
   
   <dependencies>
 
-    <!-- JUnit -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-
 	<!-- Log4J -->
 	<dependency>
 	    <groupId>log4j</groupId>
@@ -56,6 +49,10 @@
 	</dependency>
 
 	<!-- Spring Security -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	</dependency>	
 	<dependency>
 		<groupId>org.springframework.security</groupId>
 		<artifactId>spring-security-web</artifactId>
@@ -82,6 +79,28 @@
 	    <groupId>org.springframework.data</groupId>
 	    <artifactId>spring-data-jpa</artifactId>
 	</dependency>
+	
+	<!-- Testing -->
+	<dependency>
+	    <groupId>org.hamcrest</groupId>
+	    <artifactId>hamcrest-all</artifactId>
+	    <scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>org.mockito</groupId>
+	    <artifactId>mockito-core</artifactId>
+	    <scope>test</scope>
+	</dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <scope>test</scope>
+	</dependency>	
 	
 	<!-- Javax -->
 	<dependency>
@@ -138,12 +157,6 @@
 	  <groupId>org.aeonbits.owner</groupId>
 	  <artifactId>owner</artifactId>
 	  <version>1.0.9</version>
-	</dependency>
-
-	<!-- Joda Time -->
-	<dependency>
-	    <groupId>joda-time</groupId>
-	    <artifactId>joda-time</artifactId>	    
 	</dependency>
 	
 	<!-- String Template -->

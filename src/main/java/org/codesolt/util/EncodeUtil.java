@@ -13,7 +13,6 @@ public class EncodeUtil {
 
 	public static String encodeBase64String(String string) {
 		return Base64.getEncoder().encodeToString(string.getBytes());
-		
 	}
 	
 	public static String decodeBase64String(String string) {
