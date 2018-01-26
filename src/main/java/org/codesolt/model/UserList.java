@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserList extends Response {
 	
-	private int results;
+	private Integer results;
 	private List<User> users;
 }

@@ -16,14 +16,11 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 public class User {
 

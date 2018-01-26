@@ -35,18 +35,18 @@ public class UserController {
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public ResponseEntity<UserList> updateUser(@Valid @RequestBody User user) {
 		ActivityLogger.logMethod("updateUser(user)");
-		return new ResponseEntity<UserList>(userManager.createUser(user), HttpStatus.OK);
+		return new ResponseEntity<UserList>(userManager.updateUser(user), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Delete User by username", notes = "Access only for Admin Role")	
-	@RequestMapping(value = "{username}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "{username}/", method = RequestMethod.DELETE)
 	public ResponseEntity<UserList> deleteUser(@Valid @PathVariable("username") String userName) {
 		ActivityLogger.logMethod("deleteUser(userName)");
 		return new ResponseEntity<UserList>(userManager.deleteUser(userName), HttpStatus.OK);		
 	}
 	
 	@ApiOperation(value = "Get User by username", notes = "Access only for Admin Role")
-	@RequestMapping(value = {"{username}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"{username}/"}, method = RequestMethod.GET)
 	public ResponseEntity<UserList> getUser(@Valid @PathVariable("username") String userName) {
 		ActivityLogger.logMethod("getUsers(userName)");
 		return new ResponseEntity<UserList>(userManager.getUsers(userName), HttpStatus.OK);

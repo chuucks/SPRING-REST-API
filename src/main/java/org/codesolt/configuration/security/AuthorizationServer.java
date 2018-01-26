@@ -1,4 +1,4 @@
-package org.codesolt.security;
+package org.codesolt.configuration.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +50,4 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 		oauthServer.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')").checkTokenAccess(
 				"hasAuthority('ROLE_TRUSTED_CLIENT')");
 	}
-
 }

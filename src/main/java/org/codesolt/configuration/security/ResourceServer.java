@@ -1,4 +1,4 @@
-package org.codesolt.security;
+package org.codesolt.configuration.security;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -26,5 +26,4 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
 		.antMatchers("/user/**").access("hasRole('ADMIN')")
 		.and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
-
 }

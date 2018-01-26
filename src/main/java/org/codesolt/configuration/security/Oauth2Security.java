@@ -1,4 +1,4 @@
-package org.codesolt.security;
+package org.codesolt.configuration.security;
 
 import javax.sql.DataSource;
 

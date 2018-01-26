@@ -2,7 +2,6 @@ package org.codesolt.manager;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -43,7 +42,7 @@ public class UserManager {
 	public UserList updateUser(User user) {
 		Instant start = Instant.now();
 		UserList userList = new UserList();
-		try {			
+		try {
 			user.setId(userRepo.findIdByUserName(user.getUserName()));
 			userRepo.save(user);
 			userList.setSuccess(true);
