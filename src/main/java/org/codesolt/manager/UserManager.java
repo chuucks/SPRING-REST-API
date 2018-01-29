@@ -8,7 +8,8 @@ import org.apache.log4j.Logger;
 import org.codesolt.model.User;
 import org.codesolt.model.UserList;
 import org.codesolt.repository.UserRepository;
-import org.codesolt.util.TimeUtils;
+import org.codesolt.util.EncodeUtil;
+import org.codesolt.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
@@ -26,33 +27,19 @@ public class UserManager {
 		Instant start = Instant.now();
 		UserList userList = new UserList();		
 		try {
-			userRepo.save(user);			
+			Integer id = userRepo.findIdByUserName(user.getUserName());
+			if(id != null)
+				user.setId(id);
+			if(user.getPassword() != null)
+				user.setPassword(EncodeUtil.bCryptencodeString(user.getPassword()));			
+			userRepo.save(user);	
 			userList.setSuccess(true);
-			userList.setMessagge("User created");
 		} catch(Exception ex) {
 			ex.printStackTrace();
-			userList.setError("Couldn't complete operation");
+			userList.setError(ex.toString());
 			userList.setSuccess(false);
 		}
-		userList.setDuration(TimeUtils.formatDuration(Duration.between(start, Instant.now())));
-		return userList;
-	}
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public UserList updateUser(User user) {
-		Instant start = Instant.now();
-		UserList userList = new UserList();
-		try {
-			user.setId(userRepo.findIdByUserName(user.getUserName()));
-			userRepo.save(user);
-			userList.setSuccess(true);
-			userList.setMessagge("User updated");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			userList.setError("Couldn't complete operation");
-			userList.setSuccess(false);
-		}
-		userList.setDuration(TimeUtils.formatDuration(Duration.between(start, Instant.now())));
+		userList.setDuration(TimeUtil.formatDuration(Duration.between(start, Instant.now())));
 		return userList;
 	}
 
@@ -63,13 +50,12 @@ public class UserManager {
 		try {
 			userRepo.deleteByUserName(userName);
 			userList.setSuccess(true);
-			userList.setMessagge("User deleted");
 		} catch(Exception ex) {
 			ex.printStackTrace();
-			userList.setError("Couldn't complete operation");
+			userList.setError(ex.toString());
 			userList.setSuccess(false);
 		}
-		userList.setDuration(TimeUtils.formatDuration(Duration.between(start, Instant.now())));
+		userList.setDuration(TimeUtil.formatDuration(Duration.between(start, Instant.now())));
 		return userList;
 	}
 	
@@ -88,10 +74,11 @@ public class UserManager {
 			userList.setSuccess(true);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			userList.setError("Couldn't complete operation");
+			userList.setError(ex.toString());
 			userList.setSuccess(false);
 		}
-		userList.setDuration(TimeUtils.formatDuration(Duration.between(start, Instant.now())));
+		userList.setDuration(TimeUtil.formatDuration(Duration.between(start, Instant.now())));
 		return userList;
 	}
 }
+

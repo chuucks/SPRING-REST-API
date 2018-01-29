@@ -16,13 +16,27 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 public class User {
+	
+	public User(Integer id, String userName, String email, 
+			String role, Integer active, Date createTs, Date lastUpdtTs) {
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+		this.role = role;
+		this.active = active;
+		this.createTs = createTs;
+		this.lastUpdtTs = lastUpdtTs;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

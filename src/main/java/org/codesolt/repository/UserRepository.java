@@ -20,11 +20,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Integer findIdByUserName(@Param("userName") String userName);    
     
     @Query(value=
-    	"SELECT u.id, u.userName, u.email, u.role, u.active, u.createTs, u.lastUpdtTs FROM User u WHERE u.userName = :userName")
+    	"SELECT new User(u.id, u.userName, u.email, u.role, u.active, u.createTs, u.lastUpdtTs) FROM User u WHERE u.userName = :userName")
     List<User> findByUserName(@Param("userName") String userName);
     
     @Override
     @Query(value=
-        "SELECT u.userName, u.email, u.role, u.active, u.createTs, u.lastUpdtTs FROM User u")
+        "SELECT new User(u.id, u.userName, u.email, u.role, u.active, u.createTs, u.lastUpdtTs) FROM User u")
     List<User> findAll();
 }

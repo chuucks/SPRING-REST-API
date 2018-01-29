@@ -34,6 +34,12 @@
 	    <artifactId>log4j</artifactId>
 	</dependency>
   	
+  	<!-- Spring Core -->
+  	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+	</dependency>
+  	
   	<!-- Spring Web -->
     <dependency>
 		<groupId>org.springframework</groupId>
@@ -43,9 +49,15 @@
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-web</artifactId>
 	</dependency>
+	
+	<!-- Spring Data -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-jdbc</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-jpa</artifactId>
 	</dependency>
 
 	<!-- Spring Security -->
@@ -66,18 +78,8 @@
 		<artifactId>spring-security-taglibs</artifactId>
 	</dependency>
 	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-jwt</artifactId>
-	</dependency>
-	<dependency>
 		<groupId>org.springframework.security.oauth</groupId>
 		<artifactId>spring-security-oauth2</artifactId>
-	</dependency>
-	
-	<!-- Spring JPA -->
-	<dependency>
-	    <groupId>org.springframework.data</groupId>
-	    <artifactId>spring-data-jpa</artifactId>
 	</dependency>
 	
 	<!-- Testing -->
@@ -137,8 +139,12 @@
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
 	</dependency>
-  	
-  	<!-- Swagger -->
+<!-- 	<dependency> -->
+<!--     	<groupId>com.fasterxml.jackson.dataformat</groupId> -->
+<!--         <artifactId>jackson-dataformat-xml</artifactId> -->
+<!--     </dependency> -->
+	
+  	<!-- Swagger -->  	
 	<dependency>
     	<groupId>io.springfox</groupId>
     	<artifactId>springfox-swagger2</artifactId>
@@ -166,23 +172,23 @@
 	    <version>4.0.2</version>
 	</dependency>
 
-	<!-- Hibernate entity -->
+	<!-- Hibernate -->
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-entitymanager</artifactId>
-	</dependency>	
-	<!-- Hibernate validator -->
+	</dependency>
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-validator</artifactId>
 	</dependency>
-	<!-- Hikari Connection Pool -->
+	
+	<!-- Hikari -->
 	<dependency>
 		<groupId>com.zaxxer</groupId>
 		<artifactId>HikariCP</artifactId>
 	</dependency>
 
-	<!-- My SQL -->
+	<!-- MySQL -->
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
