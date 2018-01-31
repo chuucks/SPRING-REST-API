@@ -35,7 +35,7 @@ public class UserController {
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public ResponseEntity<UserList> updateUser(@Valid @RequestBody User user) {
 		ActivityLogger.logMethod("updateUser(user)");
-		return new ResponseEntity<UserList>(userManager.createUser(user), HttpStatus.OK);
+		return new ResponseEntity<UserList>(userManager.updateUser(user), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Delete User by username", notes = "Access only for Admin Role")	

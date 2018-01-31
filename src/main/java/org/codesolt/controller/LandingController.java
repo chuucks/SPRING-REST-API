@@ -12,5 +12,5 @@ public class LandingController {
 	 @RequestMapping(method = RequestMethod.GET)
      public ModelAndView  swaggerUi() {
          return new ModelAndView("redirect:" + "/swagger-ui.html");
-     }	
+     }
 }

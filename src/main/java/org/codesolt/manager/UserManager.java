@@ -27,13 +27,33 @@ public class UserManager {
 		Instant start = Instant.now();
 		UserList userList = new UserList();		
 		try {
+			if(user.getPassword() != null) {
+				user.setPassword(EncodeUtil.bCryptencodeString(user.getPassword()));
+				userRepo.save(user);
+				userList.setSuccess(true);
+			} else
+				userList.setSuccess(false);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			userList.setError(ex.toString());
+			userList.setSuccess(false);
+		}
+		userList.setDuration(TimeUtil.formatDuration(Duration.between(start, Instant.now())));
+		return userList;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public UserList updateUser(User user) {
+		Instant start = Instant.now();
+		UserList userList = new UserList();		
+		try {
 			Integer id = userRepo.findIdByUserName(user.getUserName());
-			if(id != null)
+			if(id != null) {
 				user.setId(id);
-			if(user.getPassword() != null)
-				user.setPassword(EncodeUtil.bCryptencodeString(user.getPassword()));			
-			userRepo.save(user);	
-			userList.setSuccess(true);
+				userRepo.save(user);
+				userList.setSuccess(true);
+			} else
+				userList.setSuccess(false);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			userList.setError(ex.toString());

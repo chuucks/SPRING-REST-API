@@ -7,8 +7,6 @@
 --Create specific schema for the application
 CREATE schema restapp DEFAULT CHARACTER SET = utf8 DEFAULT COLLATE = utf8_general_ci;
 
-DROP TABLE USER;
-
 --Create table for authentication and user entity
 CREATE TABLE USER (
         ID INT(9) AUTO_INCREMENT PRIMARY KEY,

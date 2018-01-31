@@ -62,7 +62,7 @@ public class User {
 	@Column(name="CREATE_TS", updatable = false)
 	private Date createTs;
 	
-	@Column(name="LAST_UPDT_TS")
+	@Column(name="LAST_UPDT_TS", updatable = true)
 	private Date lastUpdtTs;
 	
 	@PrePersist
