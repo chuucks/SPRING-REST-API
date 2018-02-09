@@ -8,6 +8,7 @@ import java.util.List;
 import org.codesolt.configuration.RestConfiguration;
 import org.codesolt.model.User;
 import org.codesolt.repository.UserRepository;
+import org.codesolt.util.EncodeUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RestConfiguration.class })
 @WebAppConfiguration
-public class TestRepository {
+public class TestReposiory {
 
 	/* 
 	 * For PROD applications,
@@ -28,7 +29,8 @@ public class TestRepository {
 	
 	@Autowired
 	private UserRepository userRepo;
-	private User user;
+	private static final String USER_NAME = "newuser13";
+	private static final String USER_MAIL = "newuser13@mail.com";
 
 	@Test
 	public void ensureGetIdByUsername() {
@@ -53,17 +55,23 @@ public class TestRepository {
 	}
 	
 	@Test
-	public void ensureCreateUser() {
-		userRepo();
-	}
-
-	@Test
-	public void updateUser() {
+	public void ensureCRUDoperations() {
+		User user = new User();
+		user.setUserName(USER_NAME);
+		user.setEmail(USER_MAIL);
+		user.setRole("ROLE_USER");
+		user.setActive(1);
+		user.setPassword(EncodeUtil.bCryptencodeString("password"));
 		
-	}
-	
-	@Test
-	public void ensureDeleteUser() {
+		User newUser = userRepo.save(user);
+		assertTrue(newUser instanceof User);
+		assertTrue(newUser == user);
+				
+		newUser.setActive(0);
+		User updateUser = userRepo.save(newUser);
+		assertTrue(newUser instanceof User);
+		assertTrue(updateUser != newUser);
 		
+		userRepo.delete(updateUser);
 	}
 }
