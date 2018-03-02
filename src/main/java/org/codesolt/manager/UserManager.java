@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.codesolt.model.User;
 import org.codesolt.model.UserList;
 import org.codesolt.repository.UserRepository;
@@ -14,10 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 @Component("userManager")
-public class UserManager {
-	
-	final static Logger logger = Logger.getLogger(UserManager.class);	
+public class UserManager {	
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -35,6 +35,7 @@ public class UserManager {
 				userList.setSuccess(false);
 		} catch(Exception ex) {
 			ex.printStackTrace();
+			log.error(ex.toString());
 			userList.setError(ex.toString());
 			userList.setSuccess(false);
 		}
@@ -56,6 +57,7 @@ public class UserManager {
 				userList.setSuccess(false);
 		} catch(Exception ex) {
 			ex.printStackTrace();
+			log.error(ex.toString());
 			userList.setError(ex.toString());
 			userList.setSuccess(false);
 		}
@@ -72,6 +74,7 @@ public class UserManager {
 			userList.setSuccess(true);
 		} catch(Exception ex) {
 			ex.printStackTrace();
+			log.error(ex.toString());
 			userList.setError(ex.toString());
 			userList.setSuccess(false);
 		}
@@ -94,6 +97,7 @@ public class UserManager {
 			userList.setSuccess(true);
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			log.error(ex.toString());
 			userList.setError(ex.toString());
 			userList.setSuccess(false);
 		}
